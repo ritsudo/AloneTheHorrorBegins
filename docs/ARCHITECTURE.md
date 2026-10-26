@@ -38,7 +38,7 @@ guarded by an `inited` flag.
 |-------|----------------|
 | `World` | Loads a `.jmap` through `TileMap`, finds the spawn/exit triggers and exposes collision/painting. All chapters use the 8x8 grid atlas `tileset_grid.png`. `dark` toggles the lighting pass; `lightRadius` is used by enemy AI. Resources are read with `getClass().getResourceAsStream()` (CLDC has no working class-literal form under JDK 8 `-source 1.4`). |
 | `TileMap` | JMAP reader (terrain ids, collision bytes, 10-byte object records), RLE decoding and camera-aware drawRegion renderer. Terrain id `N` is drawn from column `N % 8`, row `N / 8` of `tileset_grid.png`. |
-| `Player` | Position, direction, 3-pose walk animation (third pose is the mirrored contact frame), `step`/`idle`, sheet drawing. |
+| `Player` | Position, 8-direction facing, 6-frame walk animation (14×25 px cells in `player_walk.png`), `step`/`idle`, aim helpers and sheet drawing. |
 | `Enemy` | `HOWLER` (flees the flashlight) and `WALKER` (ignores light). Chase within 80 px, otherwise wander; simple axis collision; HP. |
 | `Item` | KEY / MEDKIT / BATTERY / FLASHLIGHT / PROD; pickup message. |
 | `Trigger` | Rect that fires a conversation once, with an optional action (`ACT_DARK`, `ACT_FLASHLIGHT`, `ACT_BATTERY`, `ACT_END`). |
@@ -56,7 +56,8 @@ guarded by an `inited` flag.
 
 `PlayScene.applyLight()` fills the area outside a square around the player with
 opaque black, then draws `light_g*` (flashlight, 72x72, R=36) or `light_gs*`
-(ambient, 110x110, R=55) inside it. Two wobble variants are picked from the
+(ambient, 110x110, R=55) inside it. The pool is shifted in the current facing
+direction (including diagonals) and stays there when the player stops. Two wobble variants are picked from the
 player tile. Entities are drawn *before* the mask so they darken with the world;
 the HUD is drawn after so it stays readable. Enemy AI uses `lightRadius = 80`
 to decide what a howler considers lit.

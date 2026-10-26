@@ -146,19 +146,11 @@ class PlayScene extends Scene {
 
     /** Facing offset for shots and stabs. */
     private int aimDx() {
-        switch (player.dir) {
-            case Game.DIR_LEFT: return -1;
-            case Game.DIR_RIGHT: return 1;
-            default: return 0;
-        }
+        return player.aimX();
     }
 
     private int aimDy() {
-        switch (player.dir) {
-            case Game.DIR_UP: return -1;
-            case Game.DIR_DOWN: return 1;
-            default: return 0;
-        }
+        return player.aimY();
     }
 
     private void fire() {
@@ -605,12 +597,21 @@ class PlayScene extends Scene {
      * walk.
      */
     private void applyLight(Graphics gr) {
-        int lx = player.x - camX;
-        int ly = player.y - camY - 12;
         Image[] set = flashOn ? Assets.lightG : Assets.lightGS;
         int v = ((player.x >> 5) ^ (player.y >> 5)) & 1;
         Image im = set[v];
         int R = im != null ? im.getWidth() / 2 : (flashOn ? 36 : 55);
+        // flashlight beam: the pool points where the player is facing and
+        // keeps that direction when he stops
+        int ox = 0, oy = 0;
+        int step = R / 2;
+        if (player.aimX() != 0 && player.aimY() != 0) {
+            step = (R * 2) / 5;
+        }
+        ox = player.aimX() * step;
+        oy = player.aimY() * step;
+        int lx = player.x - camX + ox;
+        int ly = player.y - camY - 12 + oy;
         int x0 = lx - R;
         int y0 = ly - R;
         int x1 = lx + R;

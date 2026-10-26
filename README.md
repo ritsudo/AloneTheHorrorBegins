@@ -5,7 +5,7 @@ game **Alone: The Horror Begins**, rebuilt from a 3,823-frame video capture of
 the original demo.
 
 The project targets **176×208 SE** screens and runs on old phones as well as
-the Sun Wireless Toolkit emulator.
+the Sun Wireless Toolkit emulator. **Current version: 1.0.1.**
 
 | Menu | Cutscene | Pickup | Map editor |
 | --- | --- | --- | --- |
@@ -47,6 +47,14 @@ restoration in progress:
 - **Plot fixing** — the recovered dialogue is partial. Some scenes are
   reconstructed from the capture and need verification or expansion when new
   material is found.
+
+## Version 1.0.1
+
+- New 8-direction player walk sheet (`res/player_walk.png`, 6 frames × 14×25 px
+  per direction: up, left-up, left, left-down, down, right-up, right, right-down).
+- The flashlight pool now points in the walking direction (including diagonals)
+  and keeps that direction when the player stops.
+- Removed the old `res/player.png` 3-pose sheet.
 
 ## Controls
 

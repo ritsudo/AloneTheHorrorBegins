@@ -56,7 +56,7 @@ class Assets {
         hudCellRed = load("hud_cell_red.png");
         hudCellOff = load("hud_cell_off.png");
         campfire = load("campfire.png");
-        player = load("player.png");
+        player = load("player_walk.png");
         howler = load("howler.png");
         zombie = load("zombie.png");
         death = new Image[] { load("death_skull.png"), load("death_spread.png") };

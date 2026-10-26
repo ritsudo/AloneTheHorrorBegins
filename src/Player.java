@@ -2,97 +2,137 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.Sprite;
 
 /**
- * The player character. The sheet (res/player.png) holds 4 directions x 3
- * real walk poses cut from the demo capture (20x28 cells, order down, up,
- * left, right). Pose 1 is the passing stance and doubles as the idle pose.
+ * The player character. The sheet (res/player_walk.png) is an 8-direction
+ * walk grid: 6 frames of 14x25 px per row, in the order up, left-up, left,
+ * left-down, down, right-up, right, right-down.
  */
 class Player {
-    static final int FW = 20;
-    static final int FH = 28;
-    static final int[] CYCLE = {0, 1, 2, 1};
+    static final int FW = 14;
+    static final int FH = 25;
+    static final int FRAMES = 6;
+
+    static final int UP = 0;
+    static final int LEFT_UP = 1;
+    static final int LEFT = 2;
+    static final int LEFT_DOWN = 3;
+    static final int DOWN = 4;
+    static final int RIGHT_UP = 5;
+    static final int RIGHT = 6;
+    static final int RIGHT_DOWN = 7;
 
     int x, y;
-    int dir = Game.DIR_DOWN;
+    int dir = DOWN;
     int frame = 0;
     int animT = 0;
     int speed = 2;
     boolean moving = false;
     int shootT = 0;          // muzzle flash / recoil timer
 
+    /** Picks the 8-way row for a movement vector. */
+    private static int dirFor(int dx, int dy) {
+        if (dx < 0) {
+            if (dy < 0) {
+                return LEFT_UP;
+            }
+            if (dy > 0) {
+                return LEFT_DOWN;
+            }
+            return LEFT;
+        }
+        if (dx > 0) {
+            if (dy < 0) {
+                return RIGHT_UP;
+            }
+            if (dy > 0) {
+                return RIGHT_DOWN;
+            }
+            return RIGHT;
+        }
+        if (dy < 0) {
+            return UP;
+        }
+        if (dy > 0) {
+            return DOWN;
+        }
+        return -1;
+    }
+
     void step(int dx, int dy) {
-        if (dx != 0) {
-            dir = dx < 0 ? Game.DIR_LEFT : Game.DIR_RIGHT;
-        } else if (dy != 0) {
-            dir = dy < 0 ? Game.DIR_UP : Game.DIR_DOWN;
+        int d = dirFor(dx, dy);
+        if (d >= 0) {
+            dir = d;
         }
         x += dx;
         y += dy;
         moving = true;
         animT++;
-        if (animT > 6) {
+        if (animT > 3) {
             animT = 0;
-            frame = CYCLE[(animSeq = (animSeq + 1) & 3)];
+            frame = (frame + 1) % FRAMES;
         }
         if (shootT > 0) {
             shootT--;
         }
     }
-
-    int animSeq = 0;
 
     void idle() {
         moving = false;
-        frame = 1;
+        frame = 0;
         animT = 0;
-        animSeq = 0;
         if (shootT > 0) {
             shootT--;
         }
     }
 
-    /** The sheet cell for the current direction and pose. */
+    int aimX() {
+        if (dir == LEFT || dir == LEFT_UP || dir == LEFT_DOWN) {
+            return -1;
+        }
+        if (dir == RIGHT || dir == RIGHT_UP || dir == RIGHT_DOWN) {
+            return 1;
+        }
+        return 0;
+    }
+
+    int aimY() {
+        if (dir == UP || dir == LEFT_UP || dir == RIGHT_UP) {
+            return -1;
+        }
+        if (dir == DOWN || dir == LEFT_DOWN || dir == RIGHT_DOWN) {
+            return 1;
+        }
+        return 0;
+    }
+
+    /** The sheet cell for the current direction and animation frame. */
     int cell() {
-        return dir * 3 + frame;
+        return dir * FRAMES + frame;
     }
 
     void paint(Graphics g, int camX, int camY, Game game) {
-        int cx = cell() * FW;
+        int cx = frame * FW;
+        int cy = dir * FH;
         int px = x - camX - FW / 2;
         int py = y - camY - FH + 2;
-        g.drawRegion(Assets.player, cx, 0, FW, FH, Sprite.TRANS_NONE,
+        g.drawRegion(Assets.player, cx, cy, FW, FH, Sprite.TRANS_NONE,
                 px, py, Graphics.TOP | Graphics.LEFT);
-        // the red gun held two-handed while armed (demo 3063..3108)
+        // the red gun held while armed (demo 3063..3108)
         if (game != null && game.hasGun && Assets.itemGun != null) {
-            int gx, gy;
-            int tr = Sprite.TRANS_NONE;
-            switch (dir) {
-                case Game.DIR_LEFT:
-                    gx = px + 1;
-                    gy = py + 19;
-                    break;
-                case Game.DIR_RIGHT:
-                    gx = px + FW - 10;
-                    gy = py + 19;
-                    tr = Sprite.TRANS_MIRROR;
-                    break;
-                case Game.DIR_UP:
-                    gx = px + (FW >> 1) - 2;
-                    gy = py + 16;
-                    break;
-                default:
-                    gx = px + (FW >> 1) - 2;
-                    gy = py + 18;
-                    break;
-            }
-            g.drawImage(Assets.itemGun, gx, gy, Graphics.TOP | Graphics.LEFT);
+            int ax = aimX();
+            int ay = aimY();
+            int gx = px + (FW >> 1) - 4 + ax * 4;
+            int gy = py + FH - 8 + ay * 4;
+            int tr = ax > 0 ? Sprite.TRANS_MIRROR : Sprite.TRANS_NONE;
+            g.drawRegion(Assets.itemGun, 0, 0,
+                    Assets.itemGun.getWidth(), Assets.itemGun.getHeight(),
+                    tr, gx, gy, Graphics.TOP | Graphics.LEFT);
             if (shootT > 10) {
                 // muzzle flash: a small burst past the barrel
                 g.setColor(0xFFF0A0);
-                int fx = dir == Game.DIR_LEFT ? gx - 4
-                        : dir == Game.DIR_RIGHT ? gx + 8 : gx + 4;
-                int fy = gy + 2;
+                int fx = gx + (ax < 0 ? -4 : ax > 0 ? 8 : 4);
+                int fy = gy + (ay < 0 ? -2 : ay > 0 ? 4 : 2);
                 g.fillRect(fx, fy, 3, 2);
-                g.fillRect(fx + (dir == Game.DIR_LEFT ? -2 : 3), fy + 1, 2, 1);
+                g.fillRect(fx + (ax < 0 ? -2 : 3), fy + 1, 2, 1);
             }
         }
     }

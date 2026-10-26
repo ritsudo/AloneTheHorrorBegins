@@ -1,0 +1,98 @@
+[
+ {
+  "kind": 2,
+  "type": 4608,
+  "x": 9,
+  "y": 23,
+  "flags": 0,
+  "param": 0
+ },
+ {
+  "kind": 2,
+  "type": 4609,
+  "x": 10,
+  "y": 5,
+  "flags": 0,
+  "param": 0
+ },
+ {
+  "kind": 0,
+  "type": 4101,
+  "x": 10,
+  "y": 4,
+  "flags": 0,
+  "param": 0
+ },
+ {
+  "kind": 0,
+  "type": 4099,
+  "x": 11,
+  "y": 5,
+  "flags": 0,
+  "param": 0
+ },
+ {
+  "kind": 0,
+  "type": 4100,
+  "x": 7,
+  "y": 16,
+  "flags": 0,
+  "param": 0
+ },
+ {
+  "kind": 0,
+  "type": 4096,
+  "x": 4,
+  "y": 17,
+  "flags": 0,
+  "param": 0
+ },
+ {
+  "kind": 1,
+  "type": 4352,
+  "x": 14,
+  "y": 5,
+  "flags": 0,
+  "param": 0
+ },
+ {
+  "kind": 1,
+  "type": 4352,
+  "x": 15,
+  "y": 22,
+  "flags": 0,
+  "param": 0
+ },
+ {
+  "kind": 2,
+  "type": 4611,
+  "x": 9,
+  "y": 22,
+  "flags": 0,
+  "param": 1
+ },
+ {
+  "kind": 2,
+  "type": 4611,
+  "x": 13,
+  "y": 5,
+  "flags": 0,
+  "param": 2
+ },
+ {
+  "kind": 2,
+  "type": 4611,
+  "x": 12,
+  "y": 12,
+  "flags": 0,
+  "param": 3
+ },
+ {
+  "kind": 2,
+  "type": 4611,
+  "x": 8,
+  "y": 6,
+  "flags": 0,
+  "param": 4
+ }
+]

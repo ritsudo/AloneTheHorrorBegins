@@ -1,0 +1,966 @@
+{
+  "format": "alonehorror-tileset",
+  "version": 1,
+  "tileSize": 16,
+  "columns": 8,
+  "rows": 8,
+  "width": 128,
+  "height": 128,
+  "atlas": "tileset_grid.png",
+  "tileCount": 64,
+  "sharedTileCount": 21,
+  "tiles": [
+    {
+      "id": 1,
+      "name": "wood_bridge",
+      "kind": "road",
+      "collision": 0,
+      "atlasIndex": 1,
+      "sx": 16,
+      "sy": 0,
+      "maps": {
+        "chapter3": 27
+      },
+      "count": 27,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 2,
+      "name": "stone_road_a",
+      "kind": "road",
+      "collision": 0,
+      "atlasIndex": 2,
+      "sx": 32,
+      "sy": 0,
+      "maps": {
+        "chapter1": 1,
+        "chapter3": 14
+      },
+      "count": 15,
+      "shared": true,
+      "fastHash": ""
+    },
+    {
+      "id": 3,
+      "name": "stone_road_b",
+      "kind": "road",
+      "collision": 0,
+      "atlasIndex": 3,
+      "sx": 48,
+      "sy": 0,
+      "maps": {
+        "chapter1": 1,
+        "chapter3": 1
+      },
+      "count": 2,
+      "shared": true,
+      "fastHash": ""
+    },
+    {
+      "id": 4,
+      "name": "stone_road_c",
+      "kind": "road",
+      "collision": 0,
+      "atlasIndex": 4,
+      "sx": 64,
+      "sy": 0,
+      "maps": {
+        "chapter1": 11,
+        "chapter2": 24,
+        "chapter3": 16
+      },
+      "count": 51,
+      "shared": true,
+      "fastHash": ""
+    },
+    {
+      "id": 5,
+      "name": "stone_road_d",
+      "kind": "road",
+      "collision": 0,
+      "atlasIndex": 5,
+      "sx": 80,
+      "sy": 0,
+      "maps": {
+        "chapter1": 8,
+        "chapter3": 6
+      },
+      "count": 14,
+      "shared": true,
+      "fastHash": ""
+    },
+    {
+      "id": 6,
+      "name": "stone_road_e",
+      "kind": "road",
+      "collision": 0,
+      "atlasIndex": 6,
+      "sx": 96,
+      "sy": 0,
+      "maps": {
+        "chapter1": 28,
+        "chapter3": 6
+      },
+      "count": 34,
+      "shared": true,
+      "fastHash": ""
+    },
+    {
+      "id": 7,
+      "name": "stone_road_f",
+      "kind": "road",
+      "collision": 0,
+      "atlasIndex": 7,
+      "sx": 112,
+      "sy": 0,
+      "maps": {
+        "chapter1": 33,
+        "chapter2": 26,
+        "chapter3": 46
+      },
+      "count": 105,
+      "shared": true,
+      "fastHash": ""
+    },
+    {
+      "id": 8,
+      "name": "dirt_road_a",
+      "kind": "road",
+      "collision": 0,
+      "atlasIndex": 8,
+      "sx": 0,
+      "sy": 16,
+      "maps": {
+        "chapter1": 10,
+        "chapter2": 10,
+        "chapter3": 10
+      },
+      "count": 30,
+      "shared": true,
+      "fastHash": ""
+    },
+    {
+      "id": 9,
+      "name": "dirt_road_b",
+      "kind": "road",
+      "collision": 0,
+      "atlasIndex": 9,
+      "sx": 16,
+      "sy": 16,
+      "maps": {
+        "chapter1": 18,
+        "chapter2": 13,
+        "chapter3": 9
+      },
+      "count": 40,
+      "shared": true,
+      "fastHash": ""
+    },
+    {
+      "id": 10,
+      "name": "dirt_road_c",
+      "kind": "road",
+      "collision": 0,
+      "atlasIndex": 10,
+      "sx": 32,
+      "sy": 16,
+      "maps": {
+        "chapter1": 1
+      },
+      "count": 1,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 11,
+      "name": "dirt_road_d",
+      "kind": "road",
+      "collision": 1,
+      "atlasIndex": 11,
+      "sx": 48,
+      "sy": 16,
+      "maps": {
+        "chapter1": 1
+      },
+      "count": 1,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 12,
+      "name": "dirt_road_e",
+      "kind": "road",
+      "collision": 0,
+      "atlasIndex": 12,
+      "sx": 64,
+      "sy": 16,
+      "maps": {
+        "chapter1": 10,
+        "chapter2": 13,
+        "chapter3": 14
+      },
+      "count": 37,
+      "shared": true,
+      "fastHash": ""
+    },
+    {
+      "id": 13,
+      "name": "dirt_road_f",
+      "kind": "road",
+      "collision": 0,
+      "atlasIndex": 13,
+      "sx": 80,
+      "sy": 16,
+      "maps": {
+        "chapter1": 1
+      },
+      "count": 1,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 14,
+      "name": "rocky_path",
+      "kind": "road",
+      "collision": 0,
+      "atlasIndex": 14,
+      "sx": 96,
+      "sy": 16,
+      "maps": {
+        "chapter1": 3,
+        "chapter2": 4,
+        "chapter3": 4
+      },
+      "count": 11,
+      "shared": true,
+      "fastHash": ""
+    },
+    {
+      "id": 15,
+      "name": "rocks_a",
+      "kind": "rock",
+      "collision": 0,
+      "atlasIndex": 15,
+      "sx": 112,
+      "sy": 16,
+      "maps": {
+        "chapter1": 1
+      },
+      "count": 1,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 16,
+      "name": "rocks_b",
+      "kind": "rock",
+      "collision": 0,
+      "atlasIndex": 16,
+      "sx": 0,
+      "sy": 32,
+      "maps": {
+        "chapter1": 1
+      },
+      "count": 1,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 17,
+      "name": "foliage_dark",
+      "kind": "foliage",
+      "collision": 1,
+      "atlasIndex": 17,
+      "sx": 16,
+      "sy": 32,
+      "maps": {
+        "chapter1": 16,
+        "chapter2": 18,
+        "chapter3": 46
+      },
+      "count": 80,
+      "shared": true,
+      "fastHash": ""
+    },
+    {
+      "id": 18,
+      "name": "foliage_teal",
+      "kind": "foliage",
+      "collision": 1,
+      "atlasIndex": 18,
+      "sx": 32,
+      "sy": 32,
+      "maps": {
+        "chapter1": 141,
+        "chapter2": 220,
+        "chapter3": 220
+      },
+      "count": 581,
+      "shared": true,
+      "fastHash": ""
+    },
+    {
+      "id": 19,
+      "name": "grass_a",
+      "kind": "foliage",
+      "collision": 1,
+      "atlasIndex": 19,
+      "sx": 48,
+      "sy": 32,
+      "maps": {
+        "chapter1": 89,
+        "chapter2": 28,
+        "chapter3": 40
+      },
+      "count": 157,
+      "shared": true,
+      "fastHash": ""
+    },
+    {
+      "id": 20,
+      "name": "foliage_b",
+      "kind": "foliage",
+      "collision": 0,
+      "atlasIndex": 20,
+      "sx": 64,
+      "sy": 32,
+      "maps": {
+        "chapter1": 12,
+        "chapter3": 3
+      },
+      "count": 15,
+      "shared": true,
+      "fastHash": ""
+    },
+    {
+      "id": 21,
+      "name": "foliage_c",
+      "kind": "foliage",
+      "collision": 0,
+      "atlasIndex": 21,
+      "sx": 80,
+      "sy": 32,
+      "maps": {
+        "chapter1": 2
+      },
+      "count": 2,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 22,
+      "name": "foliage_d",
+      "kind": "foliage",
+      "collision": 0,
+      "atlasIndex": 22,
+      "sx": 96,
+      "sy": 32,
+      "maps": {
+        "chapter1": 10,
+        "chapter3": 3
+      },
+      "count": 13,
+      "shared": true,
+      "fastHash": ""
+    },
+    {
+      "id": 23,
+      "name": "foliage_e",
+      "kind": "foliage",
+      "collision": 1,
+      "atlasIndex": 23,
+      "sx": 112,
+      "sy": 32,
+      "maps": {
+        "chapter2": 4,
+        "chapter3": 4
+      },
+      "count": 8,
+      "shared": true,
+      "fastHash": ""
+    },
+    {
+      "id": 24,
+      "name": "foliage_f",
+      "kind": "foliage",
+      "collision": 1,
+      "atlasIndex": 24,
+      "sx": 0,
+      "sy": 48,
+      "maps": {
+        "chapter1": 80,
+        "chapter2": 7,
+        "chapter3": 10
+      },
+      "count": 97,
+      "shared": true,
+      "fastHash": ""
+    },
+    {
+      "id": 25,
+      "name": "forest_floor_a",
+      "kind": "foliage",
+      "collision": 0,
+      "atlasIndex": 25,
+      "sx": 16,
+      "sy": 48,
+      "maps": {
+        "chapter1": 143,
+        "chapter2": 77,
+        "chapter3": 192
+      },
+      "count": 412,
+      "shared": true,
+      "fastHash": ""
+    },
+    {
+      "id": 26,
+      "name": "forest_floor_b",
+      "kind": "foliage",
+      "collision": 1,
+      "atlasIndex": 26,
+      "sx": 32,
+      "sy": 48,
+      "maps": {
+        "chapter1": 4
+      },
+      "count": 4,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 27,
+      "name": "foliage_g",
+      "kind": "foliage",
+      "collision": 1,
+      "atlasIndex": 27,
+      "sx": 48,
+      "sy": 48,
+      "maps": {
+        "chapter3": 1
+      },
+      "count": 1,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 28,
+      "name": "foliage_h",
+      "kind": "foliage",
+      "collision": 1,
+      "atlasIndex": 28,
+      "sx": 64,
+      "sy": 48,
+      "maps": {
+        "chapter1": 1
+      },
+      "count": 1,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 29,
+      "name": "foliage_i",
+      "kind": "foliage",
+      "collision": 1,
+      "atlasIndex": 29,
+      "sx": 80,
+      "sy": 48,
+      "maps": {
+        "chapter1": 98,
+        "chapter2": 5,
+        "chapter3": 4
+      },
+      "count": 107,
+      "shared": true,
+      "fastHash": ""
+    },
+    {
+      "id": 30,
+      "name": "foliage_j",
+      "kind": "foliage",
+      "collision": 0,
+      "atlasIndex": 30,
+      "sx": 96,
+      "sy": 48,
+      "maps": {
+        "chapter1": 1
+      },
+      "count": 1,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 31,
+      "name": "foliage_dark_b",
+      "kind": "foliage",
+      "collision": 1,
+      "atlasIndex": 31,
+      "sx": 112,
+      "sy": 48,
+      "maps": {
+        "chapter1": 2
+      },
+      "count": 2,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 32,
+      "name": "stone_wall_a",
+      "kind": "wall",
+      "collision": 1,
+      "atlasIndex": 32,
+      "sx": 0,
+      "sy": 64,
+      "maps": {
+        "chapter3": 9
+      },
+      "count": 9,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 33,
+      "name": "stone_wall_b",
+      "kind": "wall",
+      "collision": 1,
+      "atlasIndex": 33,
+      "sx": 16,
+      "sy": 64,
+      "maps": {
+        "chapter3": 32
+      },
+      "count": 32,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 34,
+      "name": "stone_wall_c",
+      "kind": "wall",
+      "collision": 1,
+      "atlasIndex": 34,
+      "sx": 32,
+      "sy": 64,
+      "maps": {
+        "chapter3": 2
+      },
+      "count": 2,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 35,
+      "name": "stone_window",
+      "kind": "wall",
+      "collision": 1,
+      "atlasIndex": 35,
+      "sx": 48,
+      "sy": 64,
+      "maps": {
+        "chapter3": 3
+      },
+      "count": 3,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 36,
+      "name": "wood_fence",
+      "kind": "wall",
+      "collision": 1,
+      "atlasIndex": 36,
+      "sx": 64,
+      "sy": 64,
+      "maps": {
+        "chapter3": 25
+      },
+      "count": 25,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 37,
+      "name": "doorway",
+      "kind": "wall",
+      "collision": 1,
+      "atlasIndex": 37,
+      "sx": 80,
+      "sy": 64,
+      "maps": {
+        "chapter1": 38,
+        "chapter2": 23,
+        "chapter3": 39
+      },
+      "count": 100,
+      "shared": true,
+      "fastHash": ""
+    },
+    {
+      "id": 38,
+      "name": "dark_stone",
+      "kind": "wall",
+      "collision": 0,
+      "atlasIndex": 38,
+      "sx": 96,
+      "sy": 64,
+      "maps": {
+        "chapter1": 6
+      },
+      "count": 6,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 39,
+      "name": "barn_corner",
+      "kind": "wall",
+      "collision": 1,
+      "atlasIndex": 39,
+      "sx": 112,
+      "sy": 64,
+      "maps": {
+        "chapter3": 3
+      },
+      "count": 3,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 40,
+      "name": "barn_door_a",
+      "kind": "wall",
+      "collision": 1,
+      "atlasIndex": 40,
+      "sx": 0,
+      "sy": 80,
+      "maps": {
+        "chapter3": 3
+      },
+      "count": 3,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 41,
+      "name": "barn_door_b",
+      "kind": "wall",
+      "collision": 1,
+      "atlasIndex": 41,
+      "sx": 16,
+      "sy": 80,
+      "maps": {
+        "chapter3": 3
+      },
+      "count": 3,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 42,
+      "name": "barn_wall_a",
+      "kind": "wall",
+      "collision": 1,
+      "atlasIndex": 42,
+      "sx": 32,
+      "sy": 80,
+      "maps": {
+        "chapter3": 44
+      },
+      "count": 44,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 43,
+      "name": "barn_wall_b",
+      "kind": "wall",
+      "collision": 1,
+      "atlasIndex": 43,
+      "sx": 48,
+      "sy": 80,
+      "maps": {
+        "chapter3": 1
+      },
+      "count": 1,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 44,
+      "name": "barn_wall_c",
+      "kind": "wall",
+      "collision": 1,
+      "atlasIndex": 44,
+      "sx": 64,
+      "sy": 80,
+      "maps": {
+        "chapter3": 1
+      },
+      "count": 1,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 45,
+      "name": "barn_wall_d",
+      "kind": "wall",
+      "collision": 1,
+      "atlasIndex": 45,
+      "sx": 80,
+      "sy": 80,
+      "maps": {
+        "chapter3": 1
+      },
+      "count": 1,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 46,
+      "name": "barn_wall_e",
+      "kind": "wall",
+      "collision": 1,
+      "atlasIndex": 46,
+      "sx": 96,
+      "sy": 80,
+      "maps": {
+        "chapter3": 1
+      },
+      "count": 1,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 47,
+      "name": "metal_fence",
+      "kind": "wall",
+      "collision": 0,
+      "atlasIndex": 47,
+      "sx": 112,
+      "sy": 80,
+      "maps": {
+        "chapter1": 5,
+        "chapter2": 12,
+        "chapter3": 21
+      },
+      "count": 38,
+      "shared": true,
+      "fastHash": ""
+    },
+    {
+      "id": 48,
+      "name": "stone_road_middle",
+      "kind": "road",
+      "collision": 0,
+      "atlasIndex": 48,
+      "sx": 0,
+      "sy": 96,
+      "maps": {
+        "chapter1": 1,
+        "chapter2": 2,
+        "chapter3": 14
+      },
+      "count": 15,
+      "shared": true,
+      "fastHash": ""
+    },
+    {
+      "id": 49,
+      "name": "empty_49",
+      "kind": "empty",
+      "collision": 1,
+      "atlasIndex": 49,
+      "sx": 16,
+      "sy": 96,
+      "maps": {},
+      "count": 0,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 50,
+      "name": "empty_50",
+      "kind": "empty",
+      "collision": 1,
+      "atlasIndex": 50,
+      "sx": 32,
+      "sy": 96,
+      "maps": {},
+      "count": 0,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 51,
+      "name": "empty_51",
+      "kind": "empty",
+      "collision": 1,
+      "atlasIndex": 51,
+      "sx": 48,
+      "sy": 96,
+      "maps": {},
+      "count": 0,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 52,
+      "name": "empty_52",
+      "kind": "empty",
+      "collision": 1,
+      "atlasIndex": 52,
+      "sx": 64,
+      "sy": 96,
+      "maps": {},
+      "count": 0,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 53,
+      "name": "empty_53",
+      "kind": "empty",
+      "collision": 1,
+      "atlasIndex": 53,
+      "sx": 80,
+      "sy": 96,
+      "maps": {},
+      "count": 0,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 54,
+      "name": "empty_54",
+      "kind": "empty",
+      "collision": 1,
+      "atlasIndex": 54,
+      "sx": 96,
+      "sy": 96,
+      "maps": {},
+      "count": 0,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 55,
+      "name": "empty_55",
+      "kind": "empty",
+      "collision": 1,
+      "atlasIndex": 55,
+      "sx": 112,
+      "sy": 96,
+      "maps": {},
+      "count": 0,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 56,
+      "name": "empty_56",
+      "kind": "empty",
+      "collision": 1,
+      "atlasIndex": 56,
+      "sx": 0,
+      "sy": 112,
+      "maps": {},
+      "count": 0,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 57,
+      "name": "empty_57",
+      "kind": "empty",
+      "collision": 1,
+      "atlasIndex": 57,
+      "sx": 16,
+      "sy": 112,
+      "maps": {},
+      "count": 0,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 58,
+      "name": "empty_58",
+      "kind": "empty",
+      "collision": 1,
+      "atlasIndex": 58,
+      "sx": 32,
+      "sy": 112,
+      "maps": {},
+      "count": 0,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 59,
+      "name": "empty_59",
+      "kind": "empty",
+      "collision": 1,
+      "atlasIndex": 59,
+      "sx": 48,
+      "sy": 112,
+      "maps": {},
+      "count": 0,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 60,
+      "name": "empty_60",
+      "kind": "empty",
+      "collision": 1,
+      "atlasIndex": 60,
+      "sx": 64,
+      "sy": 112,
+      "maps": {},
+      "count": 0,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 61,
+      "name": "empty_61",
+      "kind": "empty",
+      "collision": 1,
+      "atlasIndex": 61,
+      "sx": 80,
+      "sy": 112,
+      "maps": {},
+      "count": 0,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 62,
+      "name": "empty_62",
+      "kind": "empty",
+      "collision": 1,
+      "atlasIndex": 62,
+      "sx": 96,
+      "sy": 112,
+      "maps": {},
+      "count": 0,
+      "shared": false,
+      "fastHash": ""
+    },
+    {
+      "id": 63,
+      "name": "empty_63",
+      "kind": "empty",
+      "collision": 1,
+      "atlasIndex": 63,
+      "sx": 112,
+      "sy": 112,
+      "maps": {},
+      "count": 0,
+      "shared": false,
+      "fastHash": ""
+    }
+  ]
+}

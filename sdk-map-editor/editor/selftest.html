@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Map Studio self-test</title>
+<style>body{background:#10151b;color:#d8e1ea;font:13px/1.5 Consolas,monospace;padding:20px}pre{white-space:pre-wrap}iframe{position:absolute;left:-9999px;top:0;width:1200px;height:800px;border:0}</style>
+</head>
+<body>
+<h1>Alonehorror Map Studio self-test</h1>
+<pre id="result">running...</pre>
+<iframe id="frame" src="index.html" title="editor under test"></iframe>
+<script>
+const frame = document.getElementById('frame');
+const delay = (ms) => new Promise((r) => setTimeout(r, ms));
+function ah() { return frame.contentWindow && frame.contentWindow.__AH__; }
+
+async function run() {
+  const out = { pass: true, checks: [], errors: [] };
+  const check = (name, cond, detail) => {
+    out.checks.push({ name, ok: !!cond, detail });
+    if (!cond) out.pass = false;
+  };
+  for (let i = 0; i < 80; i++) {
+    const a = ah();
+    if (a && a.state.mapOrder.length) break;
+    await delay(250);
+  }
+  const AH = ah();
+  check('editor booted', !!AH);
+  if (!AH) throw new Error('editor did not boot');
+  check('bundle has 3 maps', AH.state.mapOrder.length === 3, AH.state.mapOrder);
+  check('tileset is 8x8', AH.state.manifest.columns === 8 && AH.state.manifest.rows === 8,
+    AH.state.manifest.columns + 'x' + AH.state.manifest.rows);
+  check('tileset loaded', AH.state.manifest.tiles.length >= 40, AH.state.manifest.tiles.length);
+  check('item palette', (AH.state.manifest.objectTypes.items || []).length >= 7,
+    (AH.state.manifest.objectTypes.items || []).length);
+  check('trigger palette', (AH.state.manifest.objectTypes.triggers || []).length >= 4);
+  for (const name of AH.state.mapOrder) {
+    AH.api.selectMap(name);
+    const s = AH.state.active;
+    const decoded = AH.api.decodeJMap(AH.api.encodeJMap(s.data));
+    let same = decoded.terrain.length === s.data.terrain.length
+      && decoded.width === s.data.width && decoded.height === s.data.height;
+    if (same) {
+      for (let i = 0; i < decoded.terrain.length; i++) {
+        if (decoded.terrain[i] !== s.data.terrain[i]) { same = false; break; }
+      }
+    }
+    check('roundtrip ' + name, same);
+    check('objects ' + name, decoded.objects.length === s.data.objects.length,
+      decoded.objects.length + '/' + s.data.objects.length);
+    const spawn = s.data.objects.some((o) => o.kind === 2 && o.type === 4608);
+    const exit = s.data.objects.some((o) => o.kind === 2 && (o.type === 4609 || o.type === 4612 || o.type === 4613));
+    const cutscenes = s.data.objects.filter((o) => o.kind === 2 && o.type === 4611).length;
+    check('spawn/ending ' + name, spawn && exit, { spawn, ending: exit });
+    check('cutscene triggers ' + name, cutscenes > 0, cutscenes);
+    const stats = AH.api.activeStats();
+    check('render ' + name, stats.nonBlack > 1000, stats.nonBlack + ' non-black px');
+  }
+  out.errors = (frame.contentWindow && frame.contentWindow.__SELFTEST_ERRORS__) || [];
+  document.getElementById('result').textContent = JSON.stringify(out, null, 2);
+  document.body.dataset.done = '1';
+}
+run().catch((e) => {
+  document.getElementById('result').textContent = 'FATAL ' + (e.stack || e.message);
+  document.body.dataset.done = '1';
+});
+</script>
+</body>
+</html>

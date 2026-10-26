@@ -1,0 +1,234 @@
+{
+  "format": "alonehorror-objects",
+  "version": 1,
+  "ranges": {
+    "terrain": [
+      1,
+      4095
+    ],
+    "items": [
+      4096,
+      4351
+    ],
+    "enemies": [
+      4352,
+      4607
+    ],
+    "triggers": [
+      4608,
+      4863
+    ],
+    "reserved": [
+      4864,
+      5119
+    ],
+    "expansion": [
+      5120,
+      65535
+    ]
+  },
+  "items": [
+    {
+      "id": 4096,
+      "name": "medkit",
+      "icon": "item_medkit.png",
+      "color": [
+        225,
+        60,
+        60
+      ],
+      "param": 25,
+      "description": "Restores the player's health."
+    },
+    {
+      "id": 4097,
+      "name": "ammo",
+      "icon": "item_ammo.png",
+      "color": [
+        225,
+        190,
+        60
+      ],
+      "param": 10,
+      "description": "Shotgun shells."
+    },
+    {
+      "id": 4098,
+      "name": "key",
+      "icon": "item_key.png",
+      "color": [
+        245,
+        220,
+        90
+      ],
+      "param": 1,
+      "description": "Opens a locked door."
+    },
+    {
+      "id": 4099,
+      "name": "note",
+      "icon": "item_note.png",
+      "color": [
+        220,
+        220,
+        220
+      ],
+      "param": 1,
+      "description": "Readable story item."
+    },
+    {
+      "id": 4100,
+      "name": "battery",
+      "icon": "item_batt.png",
+      "color": [
+        90,
+        210,
+        120
+      ],
+      "param": 1,
+      "description": "Spare flashlight cell."
+    },
+    {
+      "id": 4101,
+      "name": "flashlight",
+      "icon": "item_batt.png",
+      "color": [
+        120,
+        190,
+        255
+      ],
+      "param": 1,
+      "description": "Lights the darkness; howlers fear it."
+    },
+    {
+      "id": 4102,
+      "name": "cattle_prod",
+      "icon": "item_batt.png",
+      "color": [
+        200,
+        140,
+        255
+      ],
+      "param": 1,
+      "description": "Improvised weapon."
+    },
+    {
+      "id": 4103,
+      "name": "crowbar",
+      "icon": "item_crowbar.png",
+      "color": [
+        190,
+        190,
+        210
+      ],
+      "param": 1,
+      "description": "Pries open the red barn doors."
+    },
+    {
+      "id": 4104,
+      "name": "gun",
+      "icon": "item_gun.png",
+      "color": [
+        255,
+        120,
+        90
+      ],
+      "param": 1,
+      "description": "Jonathan's shotgun."
+    }
+  ],
+  "enemies": [
+    {
+      "id": 4352,
+      "name": "howler",
+      "icon": "howler.png",
+      "color": [
+        210,
+        110,
+        230
+      ],
+      "param": 0,
+      "description": "Hunts in the dark; flees the flashlight."
+    },
+    {
+      "id": 4353,
+      "name": "walker",
+      "icon": "zombie.png",
+      "color": [
+        150,
+        90,
+        230
+      ],
+      "param": 0,
+      "description": "Slow zombie; ignores the light."
+    }
+  ],
+  "triggers": [
+    {
+      "id": 4608,
+      "name": "player_spawn",
+      "kind": "spawn",
+      "color": [
+        235,
+        32,
+        32
+      ],
+      "description": "Red marker: where the player starts."
+    },
+    {
+      "id": 4609,
+      "name": "level_exit",
+      "kind": "exit",
+      "color": [
+        32,
+        220,
+        64
+      ],
+      "description": "Ends the chapter."
+    },
+    {
+      "id": 4610,
+      "name": "level_start",
+      "kind": "start",
+      "color": [
+        255,
+        190,
+        32
+      ],
+      "description": "Optional entry marker."
+    },
+    {
+      "id": 4611,
+      "name": "cutscene",
+      "kind": "cutscene",
+      "color": [
+        64,
+        140,
+        255
+      ],
+      "description": "Param selects the Script.java dialogue table."
+    },
+    {
+      "id": 4612,
+      "name": "talk_jonathan",
+      "kind": "talk",
+      "color": [
+        255,
+        120,
+        200
+      ],
+      "description": "Chapter 1 ending: talk to Jonathan."
+    },
+    {
+      "id": 4613,
+      "name": "door_crowbar",
+      "kind": "door",
+      "color": [
+        200,
+        40,
+        40
+      ],
+      "description": "Chapter 3 ending: open the red doors with the crowbar."
+    }
+  ]
+}

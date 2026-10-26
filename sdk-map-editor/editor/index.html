@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alonehorror Map Studio</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">AH</span>
+      <div>
+        <strong>Alonehorror Map Studio</strong>
+        <small>tile recovery SDK / J2ME map editor</small>
+      </div>
+    </div>
+    <nav id="mapTabs" class="map-tabs" aria-label="Maps"></nav>
+    <div class="top-actions">
+      <button id="btnRender" class="primary" title="Pre-render the whole map to a PNG">Pre-render PNG</button>
+      <button id="btnExportMap" title="Save the active map as a J2ME .jmap binary">Export .jmap</button>
+      <button id="btnExportProject">Export project</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="panel left">
+      <section class="block">
+        <h2>Layers</h2>
+        <div id="layerButtons" class="segmented vertical">
+          <button data-layer="terrain" class="active"><span>Terrain</span><kbd>1</kbd></button>
+          <button data-layer="collision"><span>Collision</span><kbd>2</kbd></button>
+          <button data-layer="objects"><span>Objects</span><kbd>3</kbd></button>
+          <button data-layer="anomalies"><span>Anomalies</span><kbd>4</kbd></button>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>Tools</h2>
+        <div id="toolButtons" class="segmented tools">
+          <button data-tool="brush" class="active" title="Brush (B)">Brush</button>
+          <button data-tool="erase" title="Eraser (E)">Erase</button>
+          <button data-tool="fill" title="Flood fill (F)">Fill</button>
+          <button data-tool="picker" title="Pick tile (I)">Pick</button>
+        </div>
+        <div id="collisionTools" class="collision-tools hidden">
+          <label>Collision brush
+            <select id="collisionBrush">
+              <option value="1">Solid</option>
+              <option value="2">Water</option>
+              <option value="4">Pit</option>
+              <option value="8">Hazard</option>
+              <option value="16">Door</option>
+              <option value="32">Ladder</option>
+              <option value="0">Walkable</option>
+            </select>
+          </label>
+        </div>
+        <div class="view-toggles">
+          <label><input type="checkbox" id="toggleGrid" checked> Grid</label>
+          <label><input type="checkbox" id="toggleObjects" checked> Objects</label>
+          <label><input type="checkbox" id="toggleCollision"> Collision</label>
+          <label><input type="checkbox" id="toggleAnomalies" checked> Anomaly zones</label>
+          <label><input type="checkbox" id="toggleSource"> Source overlay</label>
+        </div>
+      </section>
+
+      <section class="block growth">
+        <div class="block-head">
+          <h2 id="paletteTitle">Terrain palette</h2>
+          <span id="paletteCount" class="badge"></span>
+        </div>
+        <div id="paletteFilters" class="segmented small">
+          <button data-filter="used" class="active">Map</button>
+          <button data-filter="shared">Shared</button>
+          <button data-filter="all">All</button>
+          <button data-filter="unique">Unique</button>
+        </div>
+        <input id="paletteSearch" type="search" placeholder="Search id, name, kind...">
+        <div id="paletteScroll" class="palette-scroll">
+          <canvas id="paletteCanvas" width="272" height="100"></canvas>
+        </div>
+        <div id="tileInfo" class="tile-info">Select a tile.</div>
+      </section>
+
+      <section class="block files">
+        <h2>Files</h2>
+        <div class="file-grid">
+          <button id="btnImportMap">Import .jmap</button>
+          <button id="btnImportTileset">Import tileset</button>
+          <button id="btnReplaceSource">Replace screenshot</button>
+          <button id="btnExportTileset">Export tileset</button>
+          <button id="btnCleanGarbage" title="Remove unused tiles and clear their atlas slots">Clean garbage</button>
+        </div>
+        <div class="reslice">
+          <span>Grid offset</span>
+          <input id="offsetX" type="number" min="0" max="255" value="0" title="X phase">
+          <input id="offsetY" type="number" min="0" max="255" value="0" title="Y phase">
+          <button id="btnReslice" title="Cut this map again from the screenshot using the offset">Re-slice</button>
+        </div>
+      </section>
+    </aside>
+
+    <main class="viewport" id="viewport">
+      <canvas id="mapCanvas"></canvas>
+      <div class="statusbar">
+        <span id="statusCell">-</span>
+        <span id="statusTile">tile -</span>
+        <span id="statusCollision">collision -</span>
+        <span id="statusZoom">zoom 2x</span>
+        <span class="spacer"></span>
+        <span id="statusMap"></span>
+      </div>
+      <div id="toast" class="toast hidden"></div>
+      <div id="emptyState" class="empty-state hidden">
+        <h2>No bundle loaded</h2>
+        <p>Run <code>python tools/build_project.py</code> to generate <code>editor/bundle.js</code>,
+        or import a <code>.jmap</code> and a tileset manually.</p>
+      </div>
+    </main>
+
+    <aside class="panel right">
+      <section class="block">
+        <div class="block-head">
+          <h2>Inspector</h2>
+          <span id="dirtyBadge" class="badge muted">clean</span>
+        </div>
+        <div id="inspector" class="inspector"></div>
+      </section>
+
+      <section class="block growth">
+        <div class="block-head">
+          <h2>Anomalies</h2>
+          <span id="anomalyCount" class="badge">0</span>
+        </div>
+        <div class="block-actions">
+          <button id="btnAcceptAll" class="small">Accept all</button>
+          <button id="btnNextAnomaly" class="small">Next</button>
+        </div>
+        <div id="anomalyList" class="list anomaly-list"></div>
+      </section>
+
+      <section class="block">
+        <h2>Warnings</h2>
+        <div id="warningList" class="list warning-list"></div>
+      </section>
+
+      <section class="block growth">
+        <div class="block-head">
+          <h2>Object palette</h2>
+          <span id="objectFilterCount" class="badge"></span>
+        </div>
+        <div id="objectTabs" class="segmented small">
+          <button data-objects="triggers" class="active">Triggers</button>
+          <button data-objects="enemies">Enemies</button>
+          <button data-objects="items">Items</button>
+        </div>
+        <div id="objectList" class="object-list"></div>
+      </section>
+    </aside>
+  </div>
+</div>
+
+<input id="fileMap" type="file" accept=".jmap,application/octet-stream" hidden>
+<input id="fileTileset" type="file" accept=".json,.png,image/png,application/json" multiple hidden>
+<input id="fileSource" type="file" accept="image/png,image/*" hidden>
+
+<script src="bundle.js"></script>
+<script src="jmap.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -7,6 +7,14 @@ MIDP 2.0 / CLDC 1.1 MIDlet for a 176x208 device, reverse-engineered from a
 3823-frame storyboard capture (`alonehorror_demo_frames/`). Anything the demo
 never shows is generated procedurally.
 
+## Session 8 (v1.0.4: howler facing + animation priority)
+
+- Howlers retreat and die as soon as the player faces them (flashlight not
+  required); they can only attack from behind/side arcs.
+- Enemy animation chooses left/right for diagonals and for vertical movement
+  that is not aligned with the player; up/down only on a straight vertical line
+  within one tile.
+
 ## Session 7 (v1.0.3: howler retreat + audio freeze)
 
 - The howler light test now uses the actual beam pool position (ahead of the

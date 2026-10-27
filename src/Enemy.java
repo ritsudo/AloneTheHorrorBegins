@@ -117,8 +117,8 @@ class Enemy {
         int d2 = dx * dx + dy * dy;
 
         if (type == HOWLER) {
-            // the beam of a player facing the ghost sends it fleeing
-            if (state != ST_RETREAT && lit(px, py, flash, radius, ax, ay)) {
+            // simply facing a howler sends it fleeing, lit or not
+            if (state != ST_RETREAT && inFront(px, py, ax, ay)) {
                 state = ST_RETREAT;
                 retreatDist = 0;
             }
@@ -136,7 +136,7 @@ class Enemy {
                 x += mvx;           // ghosts ignore collision
                 y += mvy;
                 retreatDist += speed;
-                setDir(mvx, mvy);
+                setDir(mvx, mvy, px);
                 animate(3, 7);
                 if (retreatDist >= 48) {      // about three tiles
                     die();
@@ -197,16 +197,28 @@ class Enemy {
             } else {
                 wanderT = 0;
             }
-            setDir(mvx, mvy);
+            setDir(mvx, mvy, px);
             animate(type == HOWLER ? 3 : 4, type == HOWLER ? 7 : 6);
         }
     }
 
-    private void setDir(int mvx, int mvy) {
+    /**
+     * Left/right animation wins whenever there is sideways motion. Up/down
+     * is used only when the enemy moves vertically on a straight line with the
+     * player (within one tile); otherwise the side sequence is used.
+     */
+    private void setDir(int mvx, int mvy, int px) {
         if (mvx != 0) {
             dir = mvx < 0 ? Game.DIR_LEFT : Game.DIR_RIGHT;
-        } else if (mvy != 0) {
+            return;
+        }
+        if (mvy == 0) {
+            return;
+        }
+        if (Math.abs(x - px) <= World.T) {
             dir = mvy < 0 ? Game.DIR_UP : Game.DIR_DOWN;
+        } else {
+            dir = x < px ? Game.DIR_RIGHT : Game.DIR_LEFT;
         }
     }
 

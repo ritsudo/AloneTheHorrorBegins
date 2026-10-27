@@ -39,7 +39,7 @@ guarded by an `inited` flag.
 | `World` | Loads a `.jmap` through `TileMap`, finds the spawn/exit triggers and exposes collision/painting. All chapters use the 8x8 grid atlas `tileset_grid.png`. `dark` toggles the lighting pass; `lightRadius` is used by enemy AI. Resources are read with `getClass().getResourceAsStream()` (CLDC has no working class-literal form under JDK 8 `-source 1.4`). |
 | `TileMap` | JMAP reader (terrain ids, collision bytes, 10-byte object records), RLE decoding and camera-aware drawRegion renderer. Terrain id `N` is drawn from column `N % 8`, row `N / 8` of `tileset_grid.png`. |
 | `Player` | Position, 8-direction facing, 6-frame walk animation (14×25 px cells in `player_walk.png`), `step`/`idle`, aim helpers and sheet drawing. |
-| `Enemy` | `HOWLER` (flees the flashlight) and `WALKER` (ignores light). Chase within 80 px, otherwise wander; simple axis collision; HP. |
+| `Enemy` | `HOWLER` (ghost: ignores walls/weapons, projects a howl marker when behind the player and retreats about three tiles when lit while faced) and `WALKER` (collides, chases, can be shot or stabbed). Both use `*_full.png` sheets and the 8-frame `death_full.png` burst. |
 | `Item` | KEY / MEDKIT / BATTERY / FLASHLIGHT / PROD; pickup message. |
 | `Trigger` | Rect that fires a conversation once, with an optional action (`ACT_DARK`, `ACT_FLASHLIGHT`, `ACT_BATTERY`, `ACT_END`). |
 | `DLine` | One dialogue line: portrait id, speaker label, text. |
@@ -64,5 +64,11 @@ to decide what a howler considers lit.
 
 ## Keys
 
-`KEY_NUM2/4/6/8` or D-pad = move, `KEY_NUM5`/fire = interact, `KEY_STAR` =
-pause, `-6` (F1 soft key) = back/cancel in menus.
+Tank controls: `KEY_NUM4/6` (or D-pad left/right) rotate, `KEY_NUM2/8`
+(or D-pad up/down) move forward/backward, `KEY_NUM5`/fire = interact,
+`KEY_NUM1/3` = flashlight, `KEY_STAR` = pause, `-6` (F1) = back/cancel.
+
+`AudioManager` owns the single MIDI channel: it loops `main_theme.mid` from the
+logo/menu, stops and unloads it when a `PlayScene` starts, and restarts it when
+the player returns to `MenuScene`. Starting any other cue stops the previous
+one immediately.

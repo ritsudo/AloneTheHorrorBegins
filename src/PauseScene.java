@@ -51,16 +51,20 @@ class PauseScene extends Scene {
 
     void paint(Graphics gr) {
         play.paintWorldOnly(gr);
-        gr.setColor(0x402818);
-        gr.fillRect(20, 40, 136, 118);
-        gr.setColor(0xE8D8B8);
-        gr.fillRect(21, 41, 134, 116);
+        if (Assets.pagePause != null) {
+            gr.drawImage(Assets.pagePause, 20, 40, Graphics.TOP | Graphics.LEFT);
+        } else {
+            gr.setColor(0x402818);
+            gr.fillRect(20, 40, 136, 118);
+            gr.setColor(0xE8D8B8);
+            gr.fillRect(21, 41, 134, 116);
+        }
         dark.drawCenter(gr, "PAUSED", 88, 50);
         for (int i = 0; i < ITEMS.length; i++) {
             int y = 72 + i * 16;
             dark.drawCenter(gr, ITEMS[i], 88, y);
             if (i == sel) {
-                Ui.campfire(gr, 28, y - 10);
+                Ui.campfire(gr, 28, y - 20);
             }
         }
         if (msgT > 0) {

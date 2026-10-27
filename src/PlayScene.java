@@ -28,9 +28,11 @@ class PlayScene extends Scene {
     boolean flashOn = false;
     int batteryT = 0;
     int damageCd = 0;
+    long lastZombieSound = 0;
     int deathT = -1;            // -1 alive, otherwise death animation timer
 
     boolean up, down, left, right;
+    int turnT = 0;
     Trigger pending;
     boolean winning = false;
     int winT = 0;
@@ -98,16 +100,16 @@ class PlayScene extends Scene {
             }
             return;
         }
-        if (key == Canvas.KEY_STAR || action == Canvas.GAME_A) {
-            g.setScene(new PauseScene(g, this));
-            return;
-        }
         // 1 / 3 toggle the light (ch2 tutorial: "PRESS '1' OR '3'")
         if (key == Canvas.KEY_NUM1 || key == Canvas.KEY_NUM3
                 || action == Canvas.GAME_B || action == Canvas.GAME_C) {
             if (g.hasFlashlight) {
                 flashOn = !flashOn;
             }
+            return;
+        }
+        if (key == Canvas.KEY_STAR) {
+            g.setScene(new PauseScene(g, this));
             return;
         }
         if (action == Canvas.FIRE || key == Canvas.KEY_NUM5) {
@@ -191,7 +193,7 @@ class PlayScene extends Scene {
         int bestD = 70 * 70;
         for (int i = 0; i < enemies.size(); i++) {
             Enemy e = (Enemy) enemies.elementAt(i);
-            if (e.state == Enemy.ST_DYING) {
+            if (e.state == Enemy.ST_DYING || e.type == Enemy.HOWLER) {
                 continue;
             }
             int dx = e.x - player.x;
@@ -222,7 +224,7 @@ class PlayScene extends Scene {
         int bestD = reach * reach;
         for (int i = 0; i < enemies.size(); i++) {
             Enemy e = (Enemy) enemies.elementAt(i);
-            if (e.state == Enemy.ST_DYING) {
+            if (e.state == Enemy.ST_DYING || e.type == Enemy.HOWLER) {
                 continue;
             }
             int dx = e.x - player.x;
@@ -330,7 +332,10 @@ class PlayScene extends Scene {
         g.combatT = 180;
         if (g.health <= 0) {
             g.health = 0;
-            deathT = 0;
+            if (deathT < 0) {
+                deathT = 0;
+                AudioManager.playOnce("game_over.mid");
+            }
         }
     }
 
@@ -346,26 +351,27 @@ class PlayScene extends Scene {
         }
         if (deathT >= 0) {
             deathT++;
-            if (deathT > 60) {
+            if (deathT > 150) {                 // six seconds of GAME OVER
+                AudioManager.stopAll();
                 g.health = 100;
                 g.battery = Math.max(g.battery, 60);
                 g.setScene(new LoadingScene(g, chapter));
             }
             return;
         }
-        int dx = 0, dy = 0;
-        if (left) {
-            dx -= player.speed;
+        // tank controls: 4/6 rotate, 2/8 move forward/backward
+        if (left != right) {
+            if (turnT <= 0) {
+                player.turn(left ? -1 : 1);
+                turnT = 3;
+            }
+            turnT--;
+        } else {
+            turnT = 0;
         }
-        if (right) {
-            dx += player.speed;
-        }
-        if (up) {
-            dy -= player.speed;
-        }
-        if (down) {
-            dy += player.speed;
-        }
+        int move = (up ? 1 : 0) - (down ? 1 : 0);
+        int dx = player.aimX() * player.speed * move;
+        int dy = player.aimY() * player.speed * move;
         if (dx != 0 || dy != 0) {
             if (canMove(player.x + dx, player.y + dy)) {
                 player.step(dx, dy);
@@ -403,8 +409,9 @@ class PlayScene extends Scene {
         boolean anyClose = false;
         for (int i = enemies.size() - 1; i >= 0; i--) {
             Enemy e = (Enemy) enemies.elementAt(i);
-            e.update(world, player.x, player.y, flashOn, radius);
-            if (e.state == Enemy.ST_DYING && e.dieT > 26) {
+            e.update(world, player.x, player.y, flashOn, radius,
+                    player.aimX(), player.aimY());
+            if (e.state == Enemy.ST_DYING && e.dieT > 36) {
                 enemies.removeElementAt(i);
                 continue;
             }
@@ -416,6 +423,23 @@ class PlayScene extends Scene {
         }
         if (anyClose) {
             g.combatT = Math.max(g.combatT, 60);
+        }
+
+        // a visible zombie moans, but not more often than every 3 seconds
+        long nowMs = System.currentTimeMillis();
+        if (nowMs - lastZombieSound > 3000) {
+            for (int i = 0; i < enemies.size(); i++) {
+                Enemy e = (Enemy) enemies.elementAt(i);
+                if (e.type != Enemy.WALKER || e.state == Enemy.ST_DYING) {
+                    continue;
+                }
+                if (Math.abs(e.x - player.x) < Game.W / 2 + 16
+                        && Math.abs(e.y - player.y) < Game.H / 2 + 24) {
+                    AudioManager.playOnce("zombie.mid");
+                    lastZombieSound = nowMs;
+                    break;
+                }
+            }
         }
 
         // impact sparks
@@ -526,14 +550,23 @@ class PlayScene extends Scene {
                 Fnt.get(0xC03020).drawCenter(gr, "THE END", 88, 96);
                 Fnt.get(0xD8C0A0).drawCenter(gr, "PRESS 5", 88, 120);
             }
-        } else if (deathT > 6) {
-            // the player falls: spread pose, then the green skull
-            Image[] de = Assets.death;
-            if (de != null && de[1] != null) {
-                Image im = deathT < 30 ? de[1] : de[0];
-                gr.drawImage(im, player.x - camX - (im.getWidth() >> 1),
-                        player.y - camY - (im.getHeight() >> 1),
-                        Graphics.TOP | Graphics.LEFT);
+        } else if (deathT >= 0) {
+            if (deathT < 40) {
+                Image sheet = Assets.deathFull;
+                if (sheet != null) {
+                    int f = deathT / 5;
+                    if (f > 7) {
+                        f = 7;
+                    }
+                    gr.drawRegion(sheet, f * 32, 0, 32, 32,
+                            javax.microedition.lcdui.game.Sprite.TRANS_NONE,
+                            player.x - camX - 16, player.y - camY - 24,
+                            Graphics.TOP | Graphics.LEFT);
+                }
+            } else {
+                gr.setColor(0);
+                gr.fillRect(0, 0, Game.W, Game.H);
+                Fnt.get(0xC03020).drawCenter(gr, "GAME OVER", 88, 92);
             }
         }
     }
@@ -570,6 +603,13 @@ class PlayScene extends Scene {
         if (world.dark) {
             applyLight(gr);
         }
+        // the bright death burst stays visible even in the dark
+        for (int i = 0; i < enemies.size(); i++) {
+            Enemy e = (Enemy) enemies.elementAt(i);
+            if (e.state == Enemy.ST_DYING) {
+                e.paint(gr, camX, camY);
+            }
+        }
 
         hud.paint(gr, g, enemyNear(), chapter >= 2);
     }
@@ -597,7 +637,8 @@ class PlayScene extends Scene {
      * walk.
      */
     private void applyLight(Graphics gr) {
-        Image[] set = flashOn ? Assets.lightG : Assets.lightGS;
+        Image[] set = (flashOn || !g.hasFlashlight)
+                ? Assets.lightGS : Assets.lightG;
         int v = ((player.x >> 5) ^ (player.y >> 5)) & 1;
         Image im = set[v];
         int R = im != null ? im.getWidth() / 2 : (flashOn ? 36 : 55);

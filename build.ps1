@@ -9,7 +9,7 @@
 param(
     [switch]$Run,
     [string]$Device = "DefaultColorPhone",
-    [string]$Version = "1.0.1"
+    [string]$Version = "1.0.2"
 )
 
 $ErrorActionPreference = "Stop"
@@ -62,7 +62,7 @@ Get-ChildItem $res -File | Where-Object { $_.Extension -in ".png", ".txt", ".mid
 $manifest = @(
     "MIDlet-1: AloneTheHorror, AloneTheHorror.png, horror"
     "MIDlet-Name: AloneTheHorror"
-    "MIDlet-Vendor: Unknown"
+    "MIDlet-Vendor: Centerscope ritsudo"
     "MIDlet-Version: $Version"
     "MicroEdition-Configuration: CLDC-1.1"
     "MicroEdition-Profile: MIDP-2.1"
@@ -79,7 +79,7 @@ $jad = @(
     "MIDlet-Jar-Size: $size"
     "MIDlet-Jar-URL: AloneTheHorror.jar"
     "MIDlet-Name: AloneTheHorror"
-    "MIDlet-Vendor: Unknown"
+    "MIDlet-Vendor: Centerscope ritsudo"
     "MIDlet-Version: $Version"
     "MicroEdition-Configuration: CLDC-1.1"
     "MicroEdition-Profile: MIDP-2.1"

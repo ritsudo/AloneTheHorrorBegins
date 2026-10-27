@@ -7,6 +7,19 @@ MIDP 2.0 / CLDC 1.1 MIDlet for a 176x208 device, reverse-engineered from a
 3823-frame storyboard capture (`alonehorror_demo_frames/`). Anything the demo
 never shows is generated procedurally.
 
+## Session 6 (v1.0.2: audio, tank controls, enemy sheets)
+
+- Single MIDI channel (`AudioManager`): looping `main_theme.mid` from the logo
+  until gameplay, restart on return to the main menu, one-shot
+  `game_over.mid`/`zombie.mid`/`howler1/2.mid`/`enemy_death.mid`; a new cue
+  stops and unloads the previous one.
+- Tank controls: 4/6 rotate, 2/8 move forward/backward.
+- New enemy sheets: `howler_full.png` (10 frames), `zombie_full.png` (4x4) and
+  `death_full.png` (8-frame burst). Howlers ignore walls/weapons, howl when
+  behind the player and retreat three tiles when lit while faced.
+- Pause menu uses `page_pause.png`; campfire moved up 10 px.
+- MIDlet vendor is `Centerscope ritsudo`, version `1.0.2`.
+
 ## Session 5 (final recovered terrain + SDK object integration)
 
 - **Final terrain/maps integrated** - `sdk-map-editor/assets/tileset_grid.*`

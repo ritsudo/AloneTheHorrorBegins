@@ -5,7 +5,7 @@ game **Alone: The Horror Begins**, rebuilt from a 3,823-frame video capture of
 the original demo.
 
 The project targets **176×208 SE** screens and runs on old phones as well as
-the Sun Wireless Toolkit emulator. **Current version: 1.0.1.**
+the Sun Wireless Toolkit emulator. **Current version: 1.0.2.**
 
 | Menu | Cutscene | Pickup | Map editor |
 | --- | --- | --- | --- |
@@ -48,19 +48,35 @@ restoration in progress:
   reconstructed from the capture and need verification or expansion when new
   material is found.
 
+## Version 1.0.2
+
+- Tank controls: `4`/`6` rotate the player, `2` moves forward and `8` backward.
+- Main theme (`main_theme.mid`) loops from the first logo until gameplay; it
+  restarts when the player returns to the main menu.
+- MIDI stingers: `game_over.mid` (6-second GAME OVER screen), `zombie.mid` (max
+  once per 3 seconds), `howler1/2.mid` (invisible howler) and
+  `enemy_death.mid`.
+- New enemy sheets: 10-frame `howler_full.png`, 4×4 `zombie_full.png` and the
+  8-frame `death_full.png` death sequence.
+- Howlers fly through walls, ignore weapons, flee a facing flashlight and die
+  after retreating about three tiles.
+- Pause menu uses `page_pause.png` and the campfire sits 10 px higher.
+- `1` and `3` both toggle the flashlight; only `*` opens the pause menu.
+- MIDlet vendor set to **Centerscope ritsudo**.
+
 ## Version 1.0.1
 
 - New 8-direction player walk sheet (`res/player_walk.png`, 6 frames × 14×25 px
-  per direction: up, left-up, left, left-down, down, right-up, right, right-down).
-- The flashlight pool now points in the walking direction (including diagonals)
-  and keeps that direction when the player stops.
+  per direction).
+- Directional flashlight pool that persists when the player stops.
 - Removed the old `res/player.png` 3-pose sheet.
 
 ## Controls
 
 | Key | Action |
 | --- | --- |
-| `2` / `8` / `4` / `6` or D-pad | Move |
+| `4` / `6` or Left/Right | Rotate the player |
+| `2` / `8` or Up/Down | Move forward / backward |
 | `5` / Fire | Interact, pick up, attack, shoot |
 | `1` / `3` | Toggle flashlight (when owned) |
 | `*` | Pause |

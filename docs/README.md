@@ -58,7 +58,8 @@ AloneTheHorror/
 
 | Action | Key |
 |--------|-----|
-| Move | `2` `4` `6` `8` or D-pad |
+| Rotate | `4` / `6` or D-pad left/right |
+| Move forward / backward | `2` / `8` or D-pad up/down |
 | Talk / grab / strike / toggle light | `5` (fire) |
 | Back / cancel | `0` |
 | Pause | `*` |

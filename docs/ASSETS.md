@@ -18,7 +18,10 @@ Every image is a PNG. Runtime paths are relative to the JAR root
 | `hud_alert.png` | 16x20 | red danger `!` |
 | `hud_batt.png` | 18x20 | battery gauge outline (charge cells are drawn at runtime) |
 | `AloneTheHorror.png` | 32x38 | MIDlet icon (title crop) |
-| `player.png` | 128x25 | 8 frames (down/left/right/up x 2), 16x25; the engine adds a mirrored third stride pose |
+| `player_walk.png` | 84x200 | 8 directions x 6 frames, 14x25 |
+| `howler_full.png` | 200x24 | howler: 10 frames, 20x24 |
+| `zombie_full.png` | 56x96 | walker: 4x4 frames, 14x24 |
+| `death_full.png` | 256x32 | 8-frame enemy death burst, 32x32 |
 
 ## Map atlases
 
@@ -38,7 +41,7 @@ from the atlas width, so the loader still works with any square grid atlas.
 
 | File | Tool | Notes |
 |------|------|-------|
-| `howler.png` `zombie.png` | `sprite_gen.py` | enemy sheets, 128x22 |
+| MIDI cues | — | `main_theme.mid`, `game_over.mid`, `zombie.mid`, `howler1/2.mid`, `enemy_death.mid` |
 | `bush.png` | `sprite_gen.py` | prop |
 | `item_key.png` `item_medkit.png` `item_batt.png` | `sprite_gen.py` | pickup icons |
 | `font.png` `font_red.png` `font_cream.png` | `font_gen.py` | body font: Times Bold 13 at 92% width, metrics in `src/FntData.java` |

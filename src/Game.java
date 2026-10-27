@@ -56,9 +56,15 @@ public class Game extends Canvas implements Runnable {
     public void stop() {
         running = false;
         thread = null;
+        AudioManager.stopAll();
     }
 
     public void setScene(Scene s) {
+        if (s instanceof PlayScene) {
+            AudioManager.stopAll();      // gameplay has its own sound effects
+        } else if (s instanceof MenuScene || s instanceof LogoScene) {
+            AudioManager.playLoop("main_theme.mid");
+        }
         scene = s;
         scene.enter();
     }

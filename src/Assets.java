@@ -6,12 +6,12 @@ import javax.microedition.lcdui.Image;
  * hand built JARs.
  */
 class Assets {
-    static Image page, sign, logo, title;
+    static Image page, pagePause, sign, logo, title;
     static Image heart, vein, veinRed, alert;
     static Image hudCell, hudCellRed, hudCellOff;
     static Image campfire;
     static Image player, howler, zombie;
-    static Image[] death;
+    static Image howlerFull, zombieFull, deathFull;
     static Image itemKey, itemMedkit, itemBatt, itemNote, itemGun, itemAmmo, itemCrowbar;
     static Image tileset;
     static Image font;
@@ -45,6 +45,7 @@ class Assets {
             return;
         }
         page = load("page.png");
+        pagePause = load("page_pause.png");
         sign = load("sign.png");
         logo = load("logo.png");
         title = load("title.png");
@@ -57,9 +58,9 @@ class Assets {
         hudCellOff = load("hud_cell_off.png");
         campfire = load("campfire.png");
         player = load("player_walk.png");
-        howler = load("howler.png");
-        zombie = load("zombie.png");
-        death = new Image[] { load("death_skull.png"), load("death_spread.png") };
+        howlerFull = load("howler_full.png");
+        zombieFull = load("zombie_full.png");
+        deathFull = load("death_full.png");
         itemKey = load("item_key.png");
         itemMedkit = load("item_medkit.png");
         itemBatt = load("item_batt.png");

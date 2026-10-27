@@ -28,40 +28,20 @@ class Player {
     boolean moving = false;
     int shootT = 0;          // muzzle flash / recoil timer
 
-    /** Picks the 8-way row for a movement vector. */
-    private static int dirFor(int dx, int dy) {
-        if (dx < 0) {
-            if (dy < 0) {
-                return LEFT_UP;
-            }
-            if (dy > 0) {
-                return LEFT_DOWN;
-            }
-            return LEFT;
-        }
-        if (dx > 0) {
-            if (dy < 0) {
-                return RIGHT_UP;
-            }
-            if (dy > 0) {
-                return RIGHT_DOWN;
-            }
-            return RIGHT;
-        }
-        if (dy < 0) {
-            return UP;
-        }
-        if (dy > 0) {
-            return DOWN;
-        }
-        return -1;
+    // clockwise / counter-clockwise next facing (indexed by dir)
+    private static final int[] CW = {
+        RIGHT_UP, UP, LEFT_UP, LEFT, LEFT_DOWN, RIGHT, RIGHT_DOWN, DOWN
+    };
+    private static final int[] CCW = {
+        LEFT_UP, LEFT, LEFT_DOWN, DOWN, RIGHT_DOWN, UP, RIGHT_UP, RIGHT
+    };
+
+    /** Tank steering: rotate the facing one 45-degree step. */
+    void turn(int delta) {
+        dir = delta > 0 ? CW[dir] : CCW[dir];
     }
 
     void step(int dx, int dy) {
-        int d = dirFor(dx, dy);
-        if (d >= 0) {
-            dir = d;
-        }
         x += dx;
         y += dy;
         moving = true;

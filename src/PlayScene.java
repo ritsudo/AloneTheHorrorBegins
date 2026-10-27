@@ -457,8 +457,8 @@ class PlayScene extends Scene {
         } else {
             for (int i = 0; i < enemies.size(); i++) {
                 Enemy e = (Enemy) enemies.elementAt(i);
-                if (e.state == Enemy.ST_DYING) {
-                    continue;
+                if (e.state != Enemy.ST_WALK) {
+                    continue;           // retreating ghosts cannot hurt you
                 }
                 int ex = e.x - player.x;
                 int ey = e.y - player.y;

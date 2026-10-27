@@ -7,6 +7,15 @@ MIDP 2.0 / CLDC 1.1 MIDlet for a 176x208 device, reverse-engineered from a
 3823-frame storyboard capture (`alonehorror_demo_frames/`). Anything the demo
 never shows is generated procedurally.
 
+## Session 7 (v1.0.3: howler retreat + audio freeze)
+
+- The howler light test now uses the actual beam pool position (ahead of the
+  player), so lighting a howler starts the retreat reliably; retreating
+  howlers cannot deal contact damage and die after ~3 tiles.
+- MIDI cues are cached/prefetched once and restarted with `setMediaTime(0)`.
+  Several howls/zombie sounds no longer recreate the decoder on the game thread,
+  which caused the freeze.
+
 ## Session 6 (v1.0.2: audio, tank controls, enemy sheets)
 
 - Single MIDI channel (`AudioManager`): looping `main_theme.mid` from the logo

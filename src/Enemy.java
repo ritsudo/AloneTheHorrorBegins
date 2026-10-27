@@ -59,12 +59,17 @@ class Enemy {
         speed = type == HOWLER ? 2 : 1;
     }
 
-    boolean lit(int px, int py, boolean flash, int radius) {
+    boolean lit(int px, int py, boolean flash, int radius,
+            int ax, int ay) {
         if (!flash) {
             return false;
         }
-        int dx = x - px;
-        int dy = (y - 6) - (py - 10);
+        // the beam pool sits ahead of the player, in the facing direction
+        int step = radius / 3;
+        int lx = px + ax * step;
+        int ly = py + ay * step;
+        int dx = x - lx;
+        int dy = (y - 6) - (ly - 10);
         return dx * dx + dy * dy < radius * radius;
     }
 
@@ -113,8 +118,7 @@ class Enemy {
 
         if (type == HOWLER) {
             // the beam of a player facing the ghost sends it fleeing
-            if (state != ST_RETREAT && lit(px, py, flash, radius)
-                    && inFront(px, py, ax, ay)) {
+            if (state != ST_RETREAT && lit(px, py, flash, radius, ax, ay)) {
                 state = ST_RETREAT;
                 retreatDist = 0;
             }

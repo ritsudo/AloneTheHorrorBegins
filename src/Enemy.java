@@ -142,7 +142,7 @@ class Enemy {
                 retreatDist += speed;
                 setDir(mvx, mvy, px);
                 animate(3, 7);
-                if (retreatDist >= 48) {      // about three tiles
+                if (retreatDist >= World.T * 2) {   // two tiles
                     die();
                 }
                 return;

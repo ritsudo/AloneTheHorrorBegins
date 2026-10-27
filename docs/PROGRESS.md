@@ -7,6 +7,11 @@ MIDP 2.0 / CLDC 1.1 MIDlet for a 176x208 device, reverse-engineered from a
 3823-frame storyboard capture (`alonehorror_demo_frames/`). Anything the demo
 never shows is generated procedurally.
 
+## Session 10 (v1.0.6: shorter howler retreat)
+
+- Howler retreat distance is now two tiles (32 px) so the death animation is
+  visible; the five-tile facing trigger is unchanged.
+
 ## Session 9 (v1.0.5: howler range + animation hold)
 
 - Facing kills a howler only inside five tiles (80 px); distant ghosts are

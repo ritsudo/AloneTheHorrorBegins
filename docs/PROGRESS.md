@@ -7,6 +7,13 @@ MIDP 2.0 / CLDC 1.1 MIDlet for a 176x208 device, reverse-engineered from a
 3823-frame storyboard capture (`alonehorror_demo_frames/`). Anything the demo
 never shows is generated procedurally.
 
+## Session 9 (v1.0.5: howler range + animation hold)
+
+- Facing kills a howler only inside five tiles (80 px); distant ghosts are
+  unaffected by the player's rotation.
+- Once an enemy picks a walk-animation direction it keeps that pose for at
+  least 2.5 seconds, eliminating the close-range side/up flicker.
+
 ## Session 8 (v1.0.4: howler facing + animation priority)
 
 - Howlers retreat and die as soon as the player faces them (flashlight not

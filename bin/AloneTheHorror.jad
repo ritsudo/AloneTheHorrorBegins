@@ -1,8 +1,8 @@
 MIDlet-1: AloneTheHorror, AloneTheHorror.png, horror
-MIDlet-Jar-Size: 189843
+MIDlet-Jar-Size: 189932
 MIDlet-Jar-URL: AloneTheHorror.jar
 MIDlet-Name: AloneTheHorror
 MIDlet-Vendor: Centerscope ritsudo
-MIDlet-Version: 1.0.4
+MIDlet-Version: 1.0.5
 MicroEdition-Configuration: CLDC-1.1
 MicroEdition-Profile: MIDP-2.1

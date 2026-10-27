@@ -9,7 +9,7 @@
 param(
     [switch]$Run,
     [string]$Device = "DefaultColorPhone",
-    [string]$Version = "1.0.4"
+    [string]$Version = "1.0.5"
 )
 
 $ErrorActionPreference = "Stop"

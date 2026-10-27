@@ -49,6 +49,7 @@ class Enemy {
     int retreatDist = 0;
     int howlT = 0;
     long lastHowl = 0;
+    long dirUntil = 0;
     int speed = 1;
 
     Enemy(int x, int y, int type) {
@@ -117,10 +118,13 @@ class Enemy {
         int d2 = dx * dx + dy * dy;
 
         if (type == HOWLER) {
-            // simply facing a howler sends it fleeing, lit or not
-            if (state != ST_RETREAT && inFront(px, py, ax, ay)) {
+            // facing a howler sends it fleeing, but only when it is close:
+            // five tiles is the player's reach with the beam
+            if (state != ST_RETREAT && d2 <= (World.T * 5) * (World.T * 5)
+                    && inFront(px, py, ax, ay)) {
                 state = ST_RETREAT;
                 retreatDist = 0;
+                dirUntil = 0;       // pick the retreat direction now
             }
             if (state == ST_RETREAT) {
                 int adx = x - px;
@@ -208,18 +212,21 @@ class Enemy {
      * player (within one tile); otherwise the side sequence is used.
      */
     private void setDir(int mvx, int mvy, int px) {
+        if (mvx == 0 && mvy == 0) {
+            return;
+        }
+        long now = System.currentTimeMillis();
+        if (now < dirUntil) {
+            return;                 // keep the chosen pose for 2.5 seconds
+        }
         if (mvx != 0) {
             dir = mvx < 0 ? Game.DIR_LEFT : Game.DIR_RIGHT;
-            return;
-        }
-        if (mvy == 0) {
-            return;
-        }
-        if (Math.abs(x - px) <= World.T) {
+        } else if (Math.abs(x - px) <= World.T) {
             dir = mvy < 0 ? Game.DIR_UP : Game.DIR_DOWN;
         } else {
             dir = x < px ? Game.DIR_RIGHT : Game.DIR_LEFT;
         }
+        dirUntil = now + 2500;
     }
 
     private void animate(int frames, int period) {

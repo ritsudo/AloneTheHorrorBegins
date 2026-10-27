@@ -119,8 +119,8 @@ class Enemy {
 
         if (type == HOWLER) {
             // facing a howler sends it fleeing, but only when it is close:
-            // five tiles is the player's reach with the beam
-            if (state != ST_RETREAT && d2 <= (World.T * 5) * (World.T * 5)
+            // three tiles is the kill/facing range, two tiles the retreat
+            if (state != ST_RETREAT && d2 <= (World.T * 3) * (World.T * 3)
                     && inFront(px, py, ax, ay)) {
                 state = ST_RETREAT;
                 retreatDist = 0;

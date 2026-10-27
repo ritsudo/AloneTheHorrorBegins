@@ -5,7 +5,7 @@ game **Alone: The Horror Begins**, rebuilt from a 3,823-frame video capture of
 the original demo.
 
 The project targets **176×208 SE** screens and runs on old phones as well as
-the Sun Wireless Toolkit emulator. **Current version: 1.0.6.**
+the Sun Wireless Toolkit emulator. **Current version: 1.0.7.**
 
 | Menu | Cutscene | Pickup | Map editor |
 | --- | --- | --- | --- |
@@ -47,6 +47,12 @@ restoration in progress:
 - **Plot fixing** — the recovered dialogue is partial. Some scenes are
   reconstructed from the capture and need verification or expansion when new
   material is found.
+
+## Version 1.0.7
+
+- Howler facing/kill range reduced from five tiles to three; retreat distance
+  stays at two tiles.
+- `bin/` is no longer tracked in Git (build output only).
 
 ## Version 1.0.6
 
